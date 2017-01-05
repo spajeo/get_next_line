@@ -7,5 +7,6 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 6
+# define EOL(x) ((x) == '\n' || (x) == EOF)
 
 #endif
