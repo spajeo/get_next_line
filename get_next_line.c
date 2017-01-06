@@ -6,7 +6,7 @@
 /*   By: spajeo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 23:07:45 by spajeo            #+#    #+#             */
-/*   Updated: 2017/01/05 23:43:12 by spajeo           ###   ########.fr       */
+/*   Updated: 2017/01/06 16:07:39 by spajeo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ int		get_next_line (const int fd, char **line)
 {
 	int	static			ret = 0;  // 
 	static	char		*buff; // 
-	char		*buff_bis //                       
-	int i = 0;
-
+	int i; 
+	int t_len;
+	
+	i = 0;
 	while (1)
 	{
 		if (!ret)
@@ -29,17 +30,13 @@ int		get_next_line (const int fd, char **line)
 			else if (!ret)
 				return (0);
 		}
-		while (i < ret)
+	t_len = ft_strlen_c_l(buff, '\n', ret);
+	line = ft_strjoin(line, ft_memcpy(ft_memalloc(t_len), buff, t_len));
+	if (buff[t_len] == '\n')
 		{
-			
+			return (1);
 		}
-
 	}
-
-
-
-
-
 }
 
 
