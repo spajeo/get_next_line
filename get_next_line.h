@@ -6,7 +6,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define BUFF_SIZE 6
-# define EOL(x) ((x) == '\n' || (x) == EOF)
+# define BUFF_SIZE 35
 
 #endif

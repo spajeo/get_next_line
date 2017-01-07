@@ -11,29 +11,38 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "libft/libft.h"
 #include "get_next_line.h"
 
 int		get_next_line (const int fd, char **line)
 {
-	int	static			ret = 0;  // 
+	int	static			ret;  // 
 	static	char		*buff; // 
 	int i; 
 	int t_len;
+	int	static STARTED = 0;
 	
 	i = 0;
 	while (1)
 	{
-		if (!ret)
+		if (!STARTED || !ret)
 		{
-			if ((ret = read(fd, buff, BUFF_SIZE)) == -1)
+			STARTED = 1;
+			if ((ret = read(fd, buff, 35)) == -1)
+			{	
+				
+				ft_putchar('d');
 				return (-1);
-			else if (!ret)
+				
+			}
+			if (!ret)
 				return (0);
 		}
-	t_len = ft_strlen_c_l(buff, '\n', ret);
-	line = ft_strjoin(line, ft_memcpy(ft_memalloc(t_len), buff, t_len));
+	t_len = ft_strlen_c_len(buff, '\n', ret);
+	*line = ft_strjoin(*line, ft_memcpy(ft_memalloc(t_len), buff, t_len));
 	if (buff[t_len] == '\n')
 		{
+		ft_putchar('c');
 			return (1);
 		}
 	}
@@ -49,6 +58,7 @@ int		main (int argc, char **argv)
 	{
 		if ((argc > 2 || (fd = open(argv[1], O_RDONLY)) != -1))
 		{
+				ft_putchar('A');
 			/*
 			   if (argc > 3)
 			   print("%d", get_next_line(23, &line));
@@ -59,6 +69,7 @@ int		main (int argc, char **argv)
 			 */
 			while (get_next_line(fd, &line) == 1)
 			{
+				ft_putchar('B');
 				printf("%s", line);
 				ft_strdel(&line);
 			}
