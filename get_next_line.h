@@ -18,8 +18,19 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define BUFF_SIZE 100
+# define BUFF_SIZE 10000
 
 int             get_next_line (const int fd, char **line);
+
+typedef struct		s_gnl
+{
+	int		fd;
+	int		start;
+	struct s_fd	*next;
+}				t_gnl;
+
+# define FD t_gnl->fd
+# define RET t_gnl->ret
+# define START t_gnl->start
 
 #endif

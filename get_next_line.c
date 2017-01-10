@@ -18,9 +18,10 @@ int		get_next_line (const int fd, char **line)
 {
 	static  int		ret = 0;
 	static	char		buff[BUFF_SIZE];
-	int	i; 
-	int t_len;
-	int STARTED = 0;
+	int			i; 
+	int 			t_len;
+	int static		STARTED = 0;
+	int static		start = 0;
 
 	i = 0;
 	t_len = 0;
@@ -28,28 +29,28 @@ int		get_next_line (const int fd, char **line)
 	{
 		if (!ret)
 		{	
-			//if (STARTED == 1)		
-			//	ft_strdel(line);
+			//if (STARTED == 1 && pas en train de lire le docls)		
+			//	ft_strdel(line); + start=0;
 			if (fd < 0 || (ret = read(fd, buff, BUFF_SIZE)) == -1)
-			{
-				printf("[ret = %d]\n", ret);
 				return (-1);
-			}
 			if (!ret)
 				return (0);
-		*line = ft_strnew(0);
+			*line = ft_strnew(0);
 			STARTED = 1;
 		}
-		t_len = ft_strlen_c_len(buff, '\n', ret);
-		printf("[t_len = %d]\n", t_len); ////////////////////////////////////////////
-		*line = ft_strjoin(*line, ft_memcpy(ft_memalloc(t_len), buff, t_len));
-		printf("[line = %s]\n", *line); ////////////////////////////////////////////
+		t_len = ft_strlen_c_len(&buff[start], '\n', ret);
+		*line = ft_strjoin(*line, ft_memcpy(ft_memalloc(t_len), &buff[start], t_len));
+		/* deux caractere inutiles imprimes, mauvaise dimention pour line */
 		ret = ret - t_len;
-		if (buff[t_len] == '\n')
+		if (buff[start = start + t_len] == '\n')
 		{
-			printf("[return(1) ret = %d]\n", ret);
+			printf("[ret final = %d buff[start == %d] = %d]\n", ret, start,  buff[start] );
+			ret--;
+			start++;	
+			printf("[return(1) ret = %d buff[start == %d] = %c]\n", ret, start, buff[start]);
 			return (1);
 		}
+		printf("no return >>> [start = %d][buff[start] = %c]\n", start, buff[start] );
 	}
 }
 int		main (int argc, char **argv)
@@ -61,17 +62,15 @@ int		main (int argc, char **argv)
 	{
 		if ((argc > 2 || (fd = open(argv[1], O_RDONLY)) != -1))
 		{
-			ft_putchar('A');
-
 			if (argc > 3)
 				printf("%d", get_next_line(23, &line));
 			else
 			{
 				if (argc > 2)
 					fd = 0;
-				while (get_next_line(fd, &line) == 1) // while
+				while (get_next_line(fd, &line) == 1)
 				{
-					printf("%s", line);
+					ft_putstr(line);
 					ft_strdel(&line);
 				}
 				close(fd);
