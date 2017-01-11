@@ -6,7 +6,7 @@
 /*   By: Scarlett <Scarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 13:24:17 by Scarlett          #+#    #+#             */
-/*   Updated: 2017/01/08 13:24:17 by Scarlett         ###   ########.fr       */
+/*   Updated: 2017/01/11 15:32:50 by spajeo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 10000
+# define EOL '\n'
 
 int             get_next_line (const int fd, char **line);
 
