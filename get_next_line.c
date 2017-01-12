@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "libft/libft.h"
 #include "get_next_line.h"
-
+/*
 static int		*pick_FD(fd)
 {
 	t_gnl static	*first;
@@ -29,32 +29,32 @@ static int		*pick_FD(fd)
 	{
 		address = address->next;
 		if (!(address->next))
-			
 	}
 	return (adress);
 }
-
+*/
 int			get_next_line (const int fd, char **line)
 {
-		
+	t_gnl static	*address;
 
-	address = pick_FD(fd);
+//	address = pick_FD(fd);
 	*line = ft_strnew(0);
 	while (1)
 	{
-		if (!ret)
+		if (!RET)
 		{	
-			if (STARTED == 1)		
-				start = 0;
-			if (fd >= MAX_FD || fd < 0 || (ret = read(fd, buff, BUFF_SIZE)) == -1 || !line)
+			if (R_ONCE == 1)		
+				START = 0;
+			if (fd >= MAX_FD || fd < 0 || !line
+				|| (ret = read(fd, BUFF, BUFF_SIZE)) == -1)
 				return (-1);
-			if (!ret)
+			if (!RET)
 				return (0);
-			STARTED = 1;
+			R_ONCE = 1;
 		}
 		t_len = ft_strlen_c_len(&buff[start], EOL, ret);
 		*line = ft_strjoin_free(*line, 
-				ft_memcpy(ft_strnew(t_len), &buff[start], t_len));
+				ft_memcpy(ft_strnew(t_len), &BUFF[start], t_len));
 		if ((ret = ret - t_len) && buff[start = start + t_len] == EOL)
 		{
 			ret--;

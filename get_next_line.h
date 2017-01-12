@@ -36,8 +36,11 @@ typedef struct		*s_gnl
 	struct s_gnl		*next;
 }					t_gnl;
 
-# define FD t_gnl->fd
-# define RET t_gnl->ret
-# define START t_gnl->start
+# define FD	address.fd
+# define RET	address.ret
+# define START	address.start
+# define BUFF	adress->buff
+# define LEN	address.t_len
+# define RET	address.ret
 
 #endif
