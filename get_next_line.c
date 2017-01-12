@@ -14,8 +14,23 @@
 #include "libft/libft.h"
 #include "get_next_line.h"
 
+static int		pick_FD(fd)
+{
+	t_gnl address;
+	
+	if (!address)
+	{
+		
+	}
+	while(fd != FD)
+	{
+		address = address->next;
+	}
+}
+
 int		get_next_line (const int fd, char **line)
 {
+	t_gnl			address;
 	char static		buff[BUFF_SIZE];
 	//int static		FD;
 	int static		STARTED;
@@ -23,7 +38,7 @@ int		get_next_line (const int fd, char **line)
 	int	static		start;
 	int 			t_len;
 
-
+	address = pick_FD(fd);
 	t_len = 0;
 	*line = ft_strnew(0);
 	while (1)
@@ -31,10 +46,7 @@ int		get_next_line (const int fd, char **line)
 		if (!ret)
 		{	
 			if (STARTED == 1)		
-			{
-				ft_strdel(line);
 				start = 0;
-			}
 			if (fd < 0 || (ret = read(fd, buff, BUFF_SIZE)) == -1)
 				return (-1);
 			if (!ret)
@@ -42,11 +54,9 @@ int		get_next_line (const int fd, char **line)
 			STARTED = 1;
 		}
 		t_len = ft_strlen_c_len(&buff[start], EOL, ret);
-		*line = ft_strjoin(*line, 
-				ft_memcpy(ft_memalloc(t_len), &buff[start], t_len));
-		/* deux caractere inutiles imprimes, mauvaise dimention pour line */
-		ret = ret - t_len;
-		if (buff[start = start + t_len] == EOL)
+		*line = ft_strjoin_free(*line, 
+				ft_memcpy(ft_strnew(t_len), &buff[start], t_len));
+		if ((ret = ret - t_len) && buff[start = start + t_len] == EOL)
 		{
 			ret--;
 			start++;	
@@ -62,7 +72,7 @@ int		main (int argc, char **argv)
 	int				j;
 
 	fd = open(argv[1], O_RDONLY);
-	if((j = get_next_line(fd, &str)) > 0)
+	while((j = get_next_line(fd, &str)) > 0)
 	{
 		ft_putstr(str);
 		free(str);

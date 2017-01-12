@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define BUFF_SIZE 10000
+# define BUFF_SIZE 1
 # define EOL '\n'
 
 int             get_next_line (const int fd, char **line);
@@ -27,7 +27,7 @@ typedef struct		s_gnl
 {
 	int		fd;
 	int		start;
-	struct s_fd	*next;
+	struct s_gnl	*next;
 }				t_gnl;
 
 # define FD t_gnl->fd
