@@ -14,32 +14,31 @@
 #include "libft/libft.h"
 #include "get_next_line.h"
 
-static int		pick_FD(fd)
+static int		*pick_FD(fd)
 {
-	t_gnl address;
+	t_gnl static	*first;
+	t_gnl static	*address;
 	
 	if (!address)
 	{
-		
+		first->fd = fd;
+		address = first;
+		return (address);
 	}
-	while(fd != FD)
+	while(fd != address->fd)
 	{
 		address = address->next;
+		if (!(address->next))
+			
 	}
+	return (adress);
 }
 
-int		get_next_line (const int fd, char **line)
+int			get_next_line (const int fd, char **line)
 {
-	t_gnl			address;
-	char static		buff[BUFF_SIZE];
-	//int static		FD;
-	int static		STARTED;
-	int	static		ret;
-	int	static		start;
-	int 			t_len;
+		
 
 	address = pick_FD(fd);
-	t_len = 0;
 	*line = ft_strnew(0);
 	while (1)
 	{
@@ -47,7 +46,7 @@ int		get_next_line (const int fd, char **line)
 		{	
 			if (STARTED == 1)		
 				start = 0;
-			if (fd < 0 || (ret = read(fd, buff, BUFF_SIZE)) == -1)
+			if (fd >= MAX_FD || fd < 0 || (ret = read(fd, buff, BUFF_SIZE)) == -1 || !line)
 				return (-1);
 			if (!ret)
 				return (0);

@@ -19,16 +19,22 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 1
+# define MAX_FD 2560
 # define EOL '\n'
 
 int             get_next_line (const int fd, char **line);
 
-typedef struct		s_gnl
+typedef struct		*s_gnl
 {
-	int		fd;
-	int		start;
-	struct s_gnl	*next;
-}				t_gnl;
+	int	static          STARTED;
+	char 	static          buff[BUFF_SIZE];
+	int     static          ret;
+	int	static		fd;
+	int	static		start;
+	int     static          t_len;
+
+	struct s_gnl		*next;
+}					t_gnl;
 
 # define FD t_gnl->fd
 # define RET t_gnl->ret
