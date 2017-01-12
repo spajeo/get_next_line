@@ -26,7 +26,7 @@ int             get_next_line (const int fd, char **line);
 
 typedef struct		*s_gnl
 {
-	int	static          STARTED;
+	int	static          r_once;;
 	char 	static          buff[BUFF_SIZE];
 	int     static          ret;
 	int	static		fd;
@@ -36,6 +36,7 @@ typedef struct		*s_gnl
 	struct s_gnl		*next;
 }					t_gnl;
 
+# define R_ONCE	address.started
 # define FD	address.fd
 # define RET	address.ret
 # define START	address.start
