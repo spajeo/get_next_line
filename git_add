@@ -2,7 +2,4 @@ git add *
 git status
 git commit -m "($1)"
 git push
-libft/ git add *
-libft/ git status
-libft/ git commit -m "($1)"
-libft/ git push
+libft/ git add * && git status && git commit -m "($1)" && git push
