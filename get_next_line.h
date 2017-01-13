@@ -17,8 +17,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 100
 # define EOL '\n'
 
 int             get_next_line (const int fd, char **line);
