@@ -14,26 +14,22 @@
 
 int		get_next_line (const int fd, char **line)
 {
-	char	static		buff[BUFF_SIZE];
-	int	static		ret;
-	int	static		start;
-	int 	static		len;
-
+ 	t_gnl static NODE; 
 	*line = ft_strnew(0);
 	while (1)
 	{
-		if (!ret && !(start = 0) && 
-		(fd < 0 || (ret = read(fd, buff, BUFF_SIZE)) == -1))
+		if (!RET && !(START = 0) && 
+		(fd < 0 || (RET = read(fd, BUFF, BUFF_SIZE)) == -1))
 			return (-1);
-		if (!ret && **line)
+		if (!RET && **line)
 			return (1);
-		if (!ret)
+		if (!RET)
 			return (0);
-		len = ft_strlen_c_len(&buff[start], EOL, ret);
+		LEN = ft_strlen_c_len(&BUFF[START], EOL, RET);
 		*line = ft_strjoin_free(*line, 
-			ft_memcpy(ft_strnew(len), &buff[start], len));
-		if ((ret -= len) && (buff[start += len] == EOL) 
-			&& ret-- && start++)
+			ft_memcpy(ft_strnew(LEN), &BUFF[START], LEN));
+		if ((RET -= LEN) && (BUFF[START += LEN] == EOL) 
+			&& RET-- && START++)
 			return (1);
 	}
 }

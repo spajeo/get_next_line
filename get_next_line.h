@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: Scarlett <Scarlett@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 13:24:17 by Scarlett          #+#    #+#             */
-/*   Updated: 2017/01/11 15:32:50 by spajeo           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
@@ -24,15 +13,18 @@
 
 int             get_next_line (const int fd, char **line);
 
-typedef struct		s_gnl
+typedef struct titi
 {
-	int		fd;
-	int		start;
-	struct s_gnl	*next;
+       	char	buff[BUFF_SIZE];
+        int	ret;
+        int     start;
+        int     len;	
 }				t_gnl;
 
-# define FD t_gnl->fd
-# define RET t_gnl->ret
-# define START t_gnl->start
+# define NODE	t
+# define BUFF	t.buff
+# define RET	t.ret
+# define START	t.start
+# define LEN	t.len
 
 #endif
