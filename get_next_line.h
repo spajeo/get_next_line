@@ -6,7 +6,7 @@
 /*   By: spajeo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:20:33 by spajeo            #+#    #+#             */
-/*   Updated: 2017/01/16 21:43:48 by spajeo           ###   ########.fr       */
+/*   Updated: 2017/01/16 22:50:19 by spajeo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 
 int				get_next_line (const int fd, char **line);
 
-typedef struct	s_titi
+typedef struct		s_titi
 {
-	char		buff[BUFF_SIZE];
-	int			ret;
-	int			start;
-	int			len;
-	int			fd;
-	int			*prev;
-	int			*next;
-}				t_gnl;
+	char			buff[BUFF_SIZE];
+	int				ret;
+	int				start;
+	int				len;
+	int				fd;
+	t_gnl			*prev;
+	t_gnl			*next;
+}					t_gnl;
 
 # define NODE	t
 # define BUFF	t->buff

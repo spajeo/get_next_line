@@ -6,46 +6,45 @@
 /*   By: spajeo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 15:01:51 by spajeo            #+#    #+#             */
-/*   Updated: 2017/01/16 21:20:00 by spajeo           ###   ########.fr       */
+/*   Updated: 2017/01/16 22:55:17 by spajeo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void		*ft_lstiter(const int fd, static t_gnl *NODE, int free)
+static t_gnl		*ft_lst(const int fd, static t_gnl **node, int ffree)
 {
-	t_gnl *first;
-	t_gnl *tmp;
-	t_gnl *tmp2;
-
-	first = NODE
-	if (!free)
+	if (!ffree)
 	{	
-		next->prev = PREV;
-		prev->next = NEXT;
-		free(NODE);
-		return ;
+		if (*node->next)
+			node->next->prev = node->prev;
+		if (node->prev)
+			node->prev->next = node->next;
+		free(node);
+		return 1;
 	}
-	if (FD != fd)
-		tmp = NEXT;
-	while (fd != FD && tmp != NODE)
-		tmp = tmp->next;
-	if (fd == tmp->fd)
-		return ;
-	else if (tmp == NODE)
+	while (FD != fd PREV != NULL) 
+		node = PREV;
+	while (FD != fd && NEXT != NULL)
+		node = NEXT;
+	if (fd == FD)
 	{
+		return (2);
+	}
+	if (NEXT == NULL)
+	{
+		tmp = node->prev;
 		if (!(NODE = (t_list *)malloc(sizeof(t_list))))
 					return (NULL);
 			FD = fd;
-			return ;
+			return (1);
 	}
 }
 
-int				get_next_line(const int fd, char **line)
+int				one_line(const int fd, char **line, t_gnl *NODE)
 {
-	t_gnl static *NODE = NULL;
+//i	t_gnl static *NODE = NULL;
 
-	ft_lstiter(fd, NODE, 1)
 	if (fd < 0 || !line || !(*line = ft_strnew(0)))
 		return (-1);
 	while (1)
@@ -56,7 +55,7 @@ int				get_next_line(const int fd, char **line)
 		if (!RET && **line)
 			return (1);
 		if (!RET)
-			if (ft_lstiter(FD, NODE, 0))
+//			if (ft_lst(FD, NODE, 0))
 				return (0);
 		LEN = ft_strlen_c_len(&BUFF[START], EOL, RET);
 		*line = ft_strjoin_free(*line,
@@ -69,3 +68,12 @@ int				get_next_line(const int fd, char **line)
 		}
 	}
 }
+
+int				get_next_line(const int fd, char **line)
+{
+	static t_gnl	*begin = NULL;
+	t_gnl	*node;
+
+	node = ft_lst(fd, &begin, 1)
+}
+
