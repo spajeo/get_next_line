@@ -14,7 +14,7 @@
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {
-	char	*str;
+	char		*str;
 	int		i;
 	int		a;
 	int		p;
