@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# define BUFF_SIZE 10000
+# define BUFF_SIZE 1024
 # define EOL '\n'
 
 int					get_next_line (const int fd, char **line);
